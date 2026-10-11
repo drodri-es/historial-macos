@@ -4,7 +4,13 @@
 
 Historial is a small native macOS clipboard history app. It lives in the menu bar and opens with a configurable global shortcut (**⌥V** by default). It stores recent text, images, and file references locally, with search and previews to help you find a previous copy quickly.
 
-> Early source release. The app is built and usable locally, but the global shortcut and automatic paste still need hands-on verification on a Mac with the required permissions before a downloadable release is published.
+> Early preview. The downloadable build is unsigned and not notarized. The global shortcut and automatic paste still need hands-on verification with the required macOS permissions.
+
+## Download
+
+Download the Apple Silicon ZIP from [Releases](https://github.com/drodri-es/historial-macos/releases), unzip it, and move `Historial.app` to Applications. Requires macOS 15 or later. This build does not support Intel Macs.
+
+Because the app is not signed with an Apple Developer ID, macOS may block its first launch. After trying to open it, go to **System Settings → Privacy & Security** and choose **Open Anyway** for Historial. See [Apple’s instructions](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unknown-developer-mh40616/mac). Only make this exception if you trust the download.
 
 ## Features
 

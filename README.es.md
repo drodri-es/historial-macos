@@ -4,7 +4,13 @@
 
 Historial es una pequeña aplicación nativa de macOS para guardar copias recientes del portapapeles. Vive en la barra de menús y se abre con un atajo global configurable (**⌥V** por defecto). Conserva texto, imágenes y referencias a archivos, con búsqueda y vistas previas.
 
-> Primera publicación del código. La app se ha compilado y usado localmente, pero el atajo global y el pegado automático aún requieren una comprobación manual en un Mac con los permisos necesarios antes de publicar una descarga de la aplicación.
+> Versión preliminar. La descarga no está firmada ni notarizada por Apple. El atajo global y el pegado automático aún requieren una comprobación manual con los permisos necesarios de macOS.
+
+## Descarga
+
+Descarga el ZIP para Mac con Apple Silicon desde [Releases](https://github.com/drodri-es/historial-macos/releases), descomprímelo y mueve `Historial.app` a Aplicaciones. Requiere macOS 15 o posterior. Esta compilación no funciona en Mac con procesador Intel.
+
+Como la app no está firmada con un ID de desarrollador de Apple, macOS puede bloquear la primera apertura. Después de intentar abrirla, entra en **Ajustes del Sistema → Privacidad y seguridad** y pulsa **Abrir igualmente** para Historial. Consulta las [instrucciones de Apple](https://support.apple.com/es-es/guide/mac-help/-mh40616/mac). Autoriza la excepción solo si confías en la descarga.
 
 ## Funciones
 
