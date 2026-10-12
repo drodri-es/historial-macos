@@ -28,6 +28,8 @@ final class AppCoordinator: NSObject, NSApplicationDelegate, NSPopoverDelegate, 
     private var hotkeyHandler: EventHandlerRef?
     private var nextHotkeyID: UInt32 = 1
     private var shortcut: HotkeyPreference = .standard
+    private var accessibilityPromptRequested = false
+    private var pasteFallbackShown = false
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         if let data = UserDefaults.standard.data(forKey: "globalShortcut"),
@@ -95,9 +97,14 @@ final class AppCoordinator: NSObject, NSApplicationDelegate, NSPopoverDelegate, 
             return
         }
 
-        let options = ["AXTrustedCheckOptionPrompt": true] as CFDictionary
-        guard AXIsProcessTrustedWithOptions(options) else {
-            showPasteFallback()
+        guard AXIsProcessTrusted() else {
+            if !accessibilityPromptRequested {
+                accessibilityPromptRequested = true
+                let options = ["AXTrustedCheckOptionPrompt": true] as CFDictionary
+                _ = AXIsProcessTrustedWithOptions(options)
+            } else {
+                showPasteFallback()
+            }
             return
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) { [weak self] in
@@ -116,6 +123,8 @@ final class AppCoordinator: NSObject, NSApplicationDelegate, NSPopoverDelegate, 
     }
 
     private func showPasteFallback() {
+        guard !pasteFallbackShown else { return }
+        pasteFallbackShown = true
         let alert = NSAlert()
         alert.messageText = language.text("paste.ready")
         alert.informativeText = language.text("paste.fallback")
