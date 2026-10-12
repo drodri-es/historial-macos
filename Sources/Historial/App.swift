@@ -7,6 +7,10 @@ import SwiftUI
 enum HistorialApp {
     static func main() {
         let application = NSApplication.shared
+        if let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"),
+           let icon = NSImage(contentsOf: iconURL) {
+            application.applicationIconImage = icon
+        }
         let coordinator = AppCoordinator.shared
         application.delegate = coordinator
         application.setActivationPolicy(.accessory)
@@ -38,7 +42,7 @@ final class AppCoordinator: NSObject, NSApplicationDelegate, NSPopoverDelegate, 
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(languageDidChange), name: .historialLanguageDidChange, object: nil)
-        statusItem.button?.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: language.text("app.clipboardHistory"))
+        statusItem.button?.image = MenuBarIcon.make(accessibilityDescription: language.text("app.clipboardHistory"))
         statusItem.button?.target = self
         statusItem.button?.action = #selector(togglePopover)
         refreshChrome()
@@ -177,7 +181,7 @@ final class AppCoordinator: NSObject, NSApplicationDelegate, NSPopoverDelegate, 
     }
 
     private func refreshChrome() {
-        statusItem.button?.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: language.text("app.clipboardHistory"))
+        statusItem.button?.image = MenuBarIcon.make(accessibilityDescription: language.text("app.clipboardHistory"))
         statusItem.button?.toolTip = language.text("app.tooltip", shortcut.displayText)
         settingsWindow?.title = language.text("settings.title")
     }

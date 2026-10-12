@@ -15,6 +15,7 @@ cat > "$app_path/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key><string>local.historial.clipboard</string>
   <key>CFBundleName</key><string>Historial</string>
   <key>CFBundleDisplayName</key><string>Historial</string>
+  <key>CFBundleIconFile</key><string>AppIcon.icns</string>
   <key>CFBundleDevelopmentRegion</key><string>en</string>
   <key>CFBundleLocalizations</key><array><string>en</string><string>es</string></array>
   <key>CFBundleExecutable</key><string>Historial</string>
@@ -28,5 +29,6 @@ cat > "$app_path/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 cp -R Sources/Historial/Resources/*.lproj "$app_path/Contents/Resources/"
+cp Sources/Historial/Resources/AppIcon.icns "$app_path/Contents/Resources/"
 codesign --force --sign - "$app_path"
 print "Built $app_path"
